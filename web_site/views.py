@@ -6,16 +6,16 @@ from web_site.forms import formulario
 
 
 def mostrar_index(request):
-    return render (request, "aplicacion/index_nuevo.html", {})
+    return render (request, "web_site/index_nuevo.html", {})
     
 def index(request):
-    return render (request, "aplicacion/nuevo.html",{})
+    return render (request, "web_site/nuevo.html",{})
 
 def home(request):
-    return render (request, "aplicacion/home.html",{})
+    return render (request, "web_site/home.html",{})
 
 def lista_curso(request):
-    return render (request, "aplicacion/lista_cursos.html",{})
+    return render (request, "web_site/lista_cursos.html",{})
 
 def cursoFormulario(request):
 
