@@ -1,3 +1,5 @@
 from django.contrib import admin
+from web_site.forms import formulario
+from web_site.models import *
 
-# Register your models here.
+admin.site.register(Curso)
