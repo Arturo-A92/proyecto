@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import date, datetime
 from web_site.models import Curso
-from web_site.forms import formulario
+from web_site.forms import Busqueda, formulario
 
 
 def mostrar_index(request):
@@ -33,14 +33,24 @@ def cursoFormulario(request):
 
             curso.save()
 
-            return render(request, "aplicacion/home.html")
+            return render(request, "web_site/home.html")
         pass
     else:
 
         miFormulario= formulario()
 
-        return render(request, "aplicacion/cursoformulario.html", {"miFormulario":miFormulario})
+        return render(request, "web_site/formulario_curso.html", {"miFormulario":miFormulario})
 
 
-# Create your views here.
+def formulario_busqueda(request):
+
+    formulario_busqueda = Busqueda()
+
+    if request.GET:
+        curso = Curso.objects.filter(nombre=formulario_busqueda["criterio"]).all()
+        return render(request, "web_site/index.html", {"cursos":curso})
+
+    return render(request, "web_site/index.html",{"formulario_busqueda":formulario_busqueda})
+
+
 

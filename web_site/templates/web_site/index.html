@@ -1,0 +1,36 @@
+{% extends 'web_site/home.html' %}
+
+{% block titulos %}
+<title> index </title>
+{% endblock  %}
+
+{% block cabezera %}
+
+<h1>cursor de busqueda</h1>
+
+{% if formulario_busqueda %}
+
+    <form action="" method="GET">
+        {{formulario_busqueda}}
+       <button type="submit">Buscar</button>
+    </form>
+    
+    {% else %} 
+       
+    {% if formulario_busqueda == curso %}
+    <ul>
+        {% for curso in Curso %} 
+            <li>{{curso.nombre}}</li>        
+        {% else %}
+        <h2>no hay cursos con ese criterio</h2>
+        {% endfor %}
+    </ul>
+    {% endif %}
+   
+        
+
+{% endif %}
+
+{% endblock  %}
+
+{% block cuerpo %}  {% endblock  %}
