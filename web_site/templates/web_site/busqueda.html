@@ -1,0 +1,42 @@
+{% extends 'web_site/home.html' %}
+
+{% block titulos %}
+<title> busqueda </title>
+{% endblock  %}
+{% block foto %}
+<div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-signup.jpg" ></div>
+{% endblock  %}
+{% block cabezera %}
+
+<h1>Busqueda</h1>
+
+{% if formulario_busqueda %}
+
+    <form action="" method="GET">
+        <div class="row input-group-newsletter">
+            <div class="col-auto">{{formulario_busqueda}}</div>
+            <div class="col-auto"><button class="btn btn-light btn-xl" id="submitButton" type="submit">Buscar</button></div>
+        </div>
+    </form>
+    
+    {% else %} 
+          
+        {% if cursos %}
+            <ul>
+            {% for curso in Cursos %} 
+                <li>{{curso.nombre}}</li>
+                <li>{{curso.camada}}</li>
+            {% endfor %}  
+            </ul>
+        {% else %}
+            <h2>no hay cursos con ese criterio</h2>
+
+        {% endif %}
+        
+        
+    {% endif %}
+   
+
+{% endblock  %}
+
+{% block cuerpo %}  {% endblock  %}

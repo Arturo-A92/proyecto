@@ -39,18 +39,19 @@ def cursoFormulario(request):
 
         miFormulario= formulario()
 
-        return render(request, "web_site/formulario_curso.html", {"miFormulario":miFormulario})
+        return render(request, "web_site/formulario.html", {"miFormulario":miFormulario})
 
 
-def formulario_busqueda(request):
+def busqueda(request):
 
     formulario_busqueda = Busqueda()
 
     if request.GET:
-        curso = Curso.objects.filter(nombre=formulario_busqueda["criterio"]).all()
-        return render(request, "web_site/index.html", {"cursos":curso})
 
-    return render(request, "web_site/index.html",{"formulario_busqueda":formulario_busqueda})
+        cursos = Curso.objects.filter(nombre=formulario_busqueda['criterio']).all()
+        return render(request, "web_site/busqueda.html", {"cursos":cursos})
+
+    return render(request, "web_site/busqueda.html", {"formulario_busqueda":formulario_busqueda})
 
 
 
