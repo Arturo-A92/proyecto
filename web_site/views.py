@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import date, datetime
@@ -5,17 +6,8 @@ from web_site.models import Curso
 from web_site.forms import Busqueda, formulario
 
 
-def mostrar_index(request):
-    return render (request, "web_site/index_nuevo.html", {})
-    
-def index(request):
-    return render (request, "web_site/nuevo.html",{})
-
 def home(request):
     return render (request, "web_site/home.html",{})
-
-def lista_curso(request):
-    return render (request, "web_site/lista_cursos.html",{})
 
 def cursoFormulario(request):
 
@@ -34,7 +26,7 @@ def cursoFormulario(request):
             curso.save()
 
             return render(request, "web_site/home.html")
-        pass
+        
     else:
 
         miFormulario= formulario()
@@ -44,14 +36,50 @@ def cursoFormulario(request):
 
 def busqueda(request):
 
-    formulario_busqueda = Busqueda()
+    return render(request, "web_site/busqueda.html")
 
-    if request.GET:
+def buscar(request):
 
-        cursos = Curso.objects.filter(nombre=formulario_busqueda['criterio']).all()
-        return render(request, "web_site/busqueda.html", {"cursos":cursos})
+    if request.GET["nombre"]:
+        nombre =request.GET['nombre']
+        cursos = Curso.objects.filter(nombre__icontains=nombre)
+        return render(request, "web_site/buscar.html", {"cursos":cursos, "nombre":nombre})
 
-    return render(request, "web_site/busqueda.html", {"formulario_busqueda":formulario_busqueda})
+    else:
+        respuesta = "no enviaste datos"
+
+    return HttpResponse(respuesta)
+
+
+def borrar(request):
+
+    curso = Curso.objects.GET(nombre=request)
+    curso.delete()
+
+    cursos = Curso.objects.all()
+
+    context= {"curso": curso}
+
+    return render(request, "web_site/home.html", context)
+
+def view(request):
+    
+    nombres = Curso.objects.all()
+
+    context = {"nombres":nombres}
+
+    return render(request, "web_site/views.html", context)
 
 
 
+
+
+
+
+
+
+
+
+
+
+    

@@ -1,0 +1,36 @@
+{% extends 'web_site/home.html' %}
+
+{% block titulos %}
+<title> busqueda </title>
+{% endblock  %}
+{% block foto %}
+<div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-signup.jpg" ></div>
+{% endblock  %}
+{% block cabezera %}
+
+<h1>estamos buscando el curso de: {{nombre}}</h1>
+<p> </p>
+
+{% if cursos %}
+
+<ul> 
+<h1>     
+{% for curso in cursos %} 
+
+    <li>{{curso.nombre}}</li>
+    <li>{{curso.camada}}</li>
+
+{% endfor %}  
+</h1>
+</ul>
+
+{% endif %}   
+
+{% endblock  %}
+
+{% block cuerpo %}  {% endblock  %}
+
+      
+
+
+   

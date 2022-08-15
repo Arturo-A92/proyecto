@@ -1,0 +1,23 @@
+{% extends 'web_site/home.html' %}
+
+{% block titulos %}
+<title> borrar </title>
+{% endblock  %}
+
+{% block cabezera %}
+
+    {% for p in cursos %}
+
+        <li> {{p}}</li>
+        <button>
+            <a href= "{% url 'borrar' p.nombre %}"> Eliminar </a>
+        </button>
+
+
+    {% endfor %}
+
+    <a href="formulario">agregar curso</a>
+
+{% endblock  %}
+
+{% block cuerpo %}   {% endblock  %}
