@@ -38,22 +38,25 @@
             </div>
         </nav>
         
-        <!-- Masthead-->
+        
         <header class="masthead">
+            {% block cabezera %}
             <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
-                        {% block cabezera %}
+                        
                         <h1 class="mx-auto my-0 text-uppercase">Blogs</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
-                        <a class="btn btn-primary" href="#about">Get Started</a>
-                        {% endblock %}
+                        <a class="btn btn-primary" href="/views">Acceso a blogs</a>
+                        
                     </div>
                 </div>
             </div>
+            {% endblock %}
         </header>
+        
         {% block cuerpo %}
-        <!-- About-->
+        {% block vistas %}
         <section class="about-section text-center" id="about">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -115,6 +118,7 @@
                 </div>
             </div>
         </section>
+        {% endblock  %}
         <!-- Signup-->
         <section class="signup-section" id="signup">
             <div class="container px-4 px-lg-5">

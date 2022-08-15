@@ -1,5 +1,37 @@
-{% for p in nombres %}
+{% extends 'web_site/home.html' %}
 
-    <li>{{p.nombre}} - {{p.camada}}</li>
+{% block titulos %}
+<title> formulario </title>
+{% endblock  %}
 
-{% endfor %}
+{% block cabezera %}
+<section class="about-section text-left">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="text-white mb-4">vista</h2>
+                    {% for p in nombres %}
+                        <li class="text-white mb-4">{{p.nombre}} - {{p.camada}}</li>
+                        <button class="btn btn-light btn-xl">
+                        <a href="{% url "borrar" p.nombre %}">Eliminar</a>
+                        <a href="{% url "editar" p.nombre %}">Editar</a>
+                        </button>
+                    {% endfor %}
+                    <p>
+                    <a href= "/formulario">Agregar nombre </a>
+                    </p>
+            </div>
+        </div>                
+    </div>
+</section>
+
+{% endblock  %}
+
+{% block cuerpo %}  
+{% block vistas %}
+
+
+{% endblock  %}
+
+{% endblock  %}
+

@@ -7,17 +7,22 @@
 <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-signup.jpg" ></div>
 {% endblock  %}
 {% block cabezera %}
-
-<h1>Busqueda</h1>
-
-<form action="buscar/" method="GET">
-    <div class="row input-group-newsletter">
-        <input type="letter" name="nombre" id="nombre">
-        <div class="col-auto"><input type="submit" value="Buscar"></div>
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+            <h1>Busqueda</h1>
+            <form action="buscar/" method="GET">
+                <div class="row input-group-newsletter">
+                    <input type="letter" name="nombre" id="nombre" class="btn btn-light btn-xl">
+                    <p> </p>
+                    <div class="col-auto"><input type="submit" value="Buscar" class="btn btn-light btn-xl"></div>
+                </div>
+            </form>          
+            </div>
+        </div>
     </div>
-</form>
-            
-
+</header>
 {% endblock  %}
 
 {% block cuerpo %}  {% endblock  %}

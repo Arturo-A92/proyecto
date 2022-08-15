@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from datetime import date, datetime
 from web_site.models import Curso
 from web_site.forms import Busqueda, formulario
+from django.views.generic import ListView, DetailView, TemplateView, View
 
 
 def home(request):
@@ -33,7 +34,6 @@ def cursoFormulario(request):
 
         return render(request, "web_site/formulario.html", {"miFormulario":miFormulario})
 
-
 def busqueda(request):
 
     return render(request, "web_site/busqueda.html")
@@ -50,10 +50,9 @@ def buscar(request):
 
     return HttpResponse(respuesta)
 
+def borrar(request, nombre1):
 
-def borrar(request):
-
-    curso = Curso.objects.GET(nombre=request)
+    curso = Curso.objects.get(nombre=nombre1)
     curso.delete()
 
     cursos = Curso.objects.all()
@@ -70,12 +69,32 @@ def view(request):
 
     return render(request, "web_site/views.html", context)
 
+def editar_nombre(request, nombre1):
+    
+    nombre= Curso.objects.get(nombre=nombre1)
+    
+    if request.method == 'POST':
 
+        miFormulario = formulario(request.POST)
 
+        print(miFormulario)
 
+        if miFormulario.is_valid:
 
+            informacion = miFormulario.cleaned_data
 
+            nombre.nombre = informacion['curso']
+            nombre.camada = informacion['camada']
+            
+            nombre.save()
 
+            return render(request, "web_site/home.html")
+        
+    else:
+
+        miFormulario= formulario(initial={"nombre": nombre.nombre, "camada":nombre.camada})
+
+    return render(request, "web_site/editarformulario.html", {"miFormulario":miFormulario, "nombre1": nombre1})
 
 
 

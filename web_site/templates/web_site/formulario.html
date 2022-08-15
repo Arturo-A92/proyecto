@@ -5,23 +5,31 @@
 {% endblock  %}
 
 {% block cabezera %}
-<h1>Formulario</h1>
-{% if miFormulario.error %}
-<p style = "color: red;"> estan mal los datos, revisar</p>
-{% endif %}
-<form action="" method="POST">
-{% csrf_token %}
-<div class="col-sm-4 offset-md-1 py-4">
-    
-    <table>
-        <div class="row input-group-newsletter">        
-            <div class="col-auto">{{miFormulario.as_table}}</div>            
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+            <h1>Formulario</h1>
+                {% if miFormulario.error %}
+                <p style = "color: red;"> estan mal los datos, revisar</p>
+                {% endif %}
+                <form action="" method="POST" class="btn btn-light btn-xl">
+                {% csrf_token %}
+                <div class="col-sm-4 offset-md-1 py-4">
+                    
+                    <table>
+                        <div class="row input-group-newsletter">        
+                            <div class="col-auto">{{miFormulario.as_table}} </div>            
+                        </div>
+                    </table>
+                    <div class="col-auto"><button class="btn btn-black btn-xl" id="submitButton" type="submit">Enviar</button></div>       
+                </div>
+                </form>
+            </div>
         </div>
-    </table>
-    <div class="col-auto"><button class="btn btn-light btn-xl" id="submitButton" type="submit">Enviar</button></div>
-    
-</div>
-</form>
+    </div>
+</header>
+
 {% endblock  %}
 
 {% block cuerpo %}   {% endblock  %}
