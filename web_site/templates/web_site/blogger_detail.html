@@ -1,0 +1,47 @@
+{% extends 'web_site/inicio.html' %}
+
+{% block titulos %}
+<title> formulario </title>
+{% endblock  %}
+{% block Navigation %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">Artblog</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="{% url 'blog_list' %}">Volver a Lista Blogs</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'User-update' user.id %}">Editar Perfil</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock  %}
+{% block cabezera %}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <ul class="text-white">
+                    <li>Nombre: {{object.first_name}}<li>
+                    <li>Apellido: {{object.last_name}}<li>
+                    <li>Correo electronico: {{object.email}} </li>
+                    <li>Nombre de Usuario: {{object.username}}</li>
+                </ul>
+                
+                <img height="128" src="{{ object.avatar_set.first.image.url }}" > </img>     
+            </div>
+        </div>
+    </div>
+</header>
+
+{% endblock  %}
+
+{% block cuerpo %}   {% endblock  %}
+
+
+
+

@@ -3,7 +3,7 @@
     
     <head>
         {% block titulos %}
-        <title> Art.blog </title>
+        <title> inicio </title>
         {% endblock  %}
         {% load static %}
         <meta charset="utf-8" />
@@ -20,35 +20,50 @@
         <link href="{% static 'web_site/css/styles.css' %}" rel="stylesheet" />
     </head>
     <body id="page-top">
-        <!-- Navigation-->
+        {% block Navigation %}
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/home">Artblog</a>
+                <a class="navbar-brand" href="/">Artblog</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="/busqueda">burcar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/formulario">formulario</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                      {% if user.is_authenticated %}
+                      <li class="nav-item"><a class="nav-link" href="{% url 'blog_logout' %}">Salir</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{% url 'busqueda' %}">Buscar</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{% url 'blog_create' %}">Nuevo Blog</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{% url 'user-detail' user.id %}">Perfil {{user.username}}</a></li>
+                      {% else %}
+                      <li class="nav-item"><a class="nav-link" href="{% url 'blog_login' %}">Iniciar Sesion</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{% url 'blogger_signup' %}">Crear Cuenta</a></li>
+                      {% endif %}                        
                     </ul>
                 </div>
             </div>
         </nav>
-        
+        {% endblock  %}
         
         <header class="masthead">
             {% block cabezera %}
             <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
-                        
-                        <h1 class="mx-auto my-0 text-uppercase">Blogs</h1>
-                        <h2 class="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
-                        <a class="btn btn-primary" href="/views">Acceso a blogs</a>
-                        
+                       <h1>Lista de Blogs</h1> 
+                      {% if object_list %}
+                      {% for blog in object_list %}
+                      <li>                          
+                          <p class="btn btn-light btn-xl"><a href="{% url 'blog_detail' blog.id %}">{{blog.titulo}}</a></p>
+                          {% if user.is_authenticated %}
+                            <a href="{% url 'blog_delete' blog.id %}">Borrar</a>
+                            <a href="{% url 'blog_update' blog.id %}">Actualizar</a>
+                          {% endif %}
+                      </li>
+                      {% endfor %}
+                    {% else %}
+                    <h1> No hay blogs</h1>
+                    {% endif %}                        
                     </div>
                 </div>
             </div>
@@ -174,7 +189,7 @@
                                 <i class="fas fa-map-marked-alt text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Address</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">4923 Market Street, Orlando FL</div>
+                                <div class="small text-black-50"><a href="https://goo.gl/maps/XcgX3ac3nfE1NFeo8"> lavalle 1635, Buenos Aires </a></div>
                             </div>
                         </div>
                     </div>
@@ -219,3 +234,6 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>
+
+
+

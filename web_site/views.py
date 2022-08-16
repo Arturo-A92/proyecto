@@ -2,37 +2,18 @@ from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import date, datetime
-from web_site.models import Curso
-from web_site.forms import Busqueda, formulario
-from django.views.generic import ListView, DetailView, TemplateView, View
+from django.views.generic import ListView, TemplateView, View, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.forms import UserCreationForm
+from web_site.models import Curso, BlogModel, Avatar
+from web_site.forms import Busqueda
 
-
-def home(request):
-    return render (request, "web_site/home.html",{})
-
-def cursoFormulario(request):
-
-    if request.method == 'POST':
-
-        miFormulario = formulario(request.POST)
-
-        print(miFormulario)
-
-        if miFormulario.is_valid:
-
-            informacion = miFormulario.cleaned_data
-
-            curso = Curso (nombre=informacion['curso'], camada=informacion['camada'])
-
-            curso.save()
-
-            return render(request, "web_site/home.html")
-        
-    else:
-
-        miFormulario= formulario()
-
-        return render(request, "web_site/formulario.html", {"miFormulario":miFormulario})
 
 def busqueda(request):
 
@@ -42,61 +23,91 @@ def buscar(request):
 
     if request.GET["nombre"]:
         nombre =request.GET['nombre']
-        cursos = Curso.objects.filter(nombre__icontains=nombre)
-        return render(request, "web_site/buscar.html", {"cursos":cursos, "nombre":nombre})
+        blogs = BlogModel.objects.filter(titulo__icontains=nombre)
+        return render(request, "web_site/buscar.html", {"blogs":blogs, "titulo":nombre})
 
     else:
         respuesta = "no enviaste datos"
 
     return HttpResponse(respuesta)
 
-def borrar(request, nombre1):
 
-    curso = Curso.objects.get(nombre=nombre1)
-    curso.delete()
+#loggin
 
-    cursos = Curso.objects.all()
+class SignUpView(SuccessMessageMixin, CreateView):
+  template_name = 'web_site/blogger_crear_cuenta_form.html'
+  success_url = reverse_lazy('blog_login')
+  form_class = UserCreationForm
+  success_message = "¡¡ Se creo tu perfil satisfactoriamente !!"
 
-    context= {"curso": curso}
+class BloggerProfile(DetailView):
 
-    return render(request, "web_site/home.html", context)
+    model = User
+    template_name = "web_site/blogger_detail.html"
 
-def view(request):
-    
-    nombres = Curso.objects.all()
+class UserUpdate(LoginRequiredMixin, UpdateView):
 
-    context = {"nombres":nombres}
+    model = User
+    template_name = "web_site/user_form.html"
+    fields = ["username", "email", "first_name", "last_name"]
 
-    return render(request, "web_site/views.html", context)
+    def get_success_url(self):
+      return reverse_lazy("user-detail", kwargs={"pk": self.request.user.id})
 
-def editar_nombre(request, nombre1):
-    
-    nombre= Curso.objects.get(nombre=nombre1)
-    
-    if request.method == 'POST':
+#blog
 
-        miFormulario = formulario(request.POST)
+class BlogList(ListView):
 
-        print(miFormulario)
+    model = BlogModel
+    template_name = "web_site/inicio.html"
 
-        if miFormulario.is_valid:
 
-            informacion = miFormulario.cleaned_data
+class BlogDetail(DetailView):
 
-            nombre.nombre = informacion['curso']
-            nombre.camada = informacion['camada']
-            
-            nombre.save()
+    model = BlogModel
+    template_name = "web_site/detalles.html"
 
-            return render(request, "web_site/home.html")
+
+class BlogCreate(LoginRequiredMixin, CreateView):
+
+    model = BlogModel
+    success_url = reverse_lazy("blog_list")
+    fields = ["titulo", "sub_titulo", "cuerpo"]
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+
+
+class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    model = BlogModel
+    success_url = reverse_lazy("blog_list")
+    fields = ["titulo", "sub_titulo", "cuerpo"]
+
+    def test_func(self):
+        exist = BlogModel.objects.filter(autor=self.request.user.id, id=self.kwargs['pk'])
+        return True if exist else False
         
-    else:
-
-        miFormulario= formulario(initial={"nombre": nombre.nombre, "camada":nombre.camada})
-
-    return render(request, "web_site/editarformulario.html", {"miFormulario":miFormulario, "nombre1": nombre1})
 
 
+class BlogDelete(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+
+    model = BlogModel
+    success_url = reverse_lazy("blog_list")
+
+    def test_func(self):
+        exist = BlogModel.objects.filter(autor=self.request.user.id, id=self.kwargs['pk'])
+        return True if exist else False
+
+
+class BlogLogin(LoginView):
+    template_name = 'web_site/logueo.html'
+    next_page = reverse_lazy("blog_list")
+
+
+class BlogLogout(LogoutView):
+    template_name = 'web_site/cerrar_sesion.html'
 
 
 
