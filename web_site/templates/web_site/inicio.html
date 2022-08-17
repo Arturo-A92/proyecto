@@ -38,7 +38,11 @@
                       {% else %}
                       <li class="nav-item"><a class="nav-link" href="{% url 'blog_login' %}">Iniciar Sesion</a></li>
                       <li class="nav-item"><a class="nav-link" href="{% url 'blogger_signup' %}">Crear Cuenta</a></li>
-                      {% endif %}                        
+                      {% endif %} 
+                      {% block aboutme %}
+                      <li class="nav-item"><a class="nav-link" href="#about">About me</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#contact">Contactenos</a></li> 
+                      {% endblock  %}                      
                     </ul>
                 </div>
             </div>
@@ -72,22 +76,8 @@
         
         {% block cuerpo %}
         {% block vistas %}
-        <section class="about-section text-center" id="about">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
-                        
-                        <p class="text-white-50">
-                            
-                        
-                            
-                        </p>
-                    </div>
-                </div>                
-            </div>
-        </section>
         <!-- Projects-->
-        <section class="projects-section bg-light" id="projects">
+        <section class="projects-section bg-light" id="about">
             <div class="container px-4 px-lg-5">
                 <!-- Featured Project Row-->
                 <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">                    
@@ -95,8 +85,9 @@
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-white">Shoreline</h4>
-                                <p class="mb-0 text-white-50">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+                                <h4 class="text-white">Lo que Somos</h4>
+                                <p class="mb-0 text-white-50">como pagina buscamos el poder satisfacer las necesidades de nuestros usuarios 
+                                    para que puedan acceder de forma rapida y facil a la mayor cantidad de informacion que requieran </p>
                             </div>
                         </div>
                     </div>
@@ -109,8 +100,9 @@
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Misty</h4>
-                                    <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                                    <h4 class="text-white">Porque fue creada esta pagina</h4>
+                                    <p class="mb-0 text-white-50">Esta pagina fue diseñada con la finalidad de ser evaluada como proyecto final para el curso de CoderHouse
+                                         </p>
                                     <hr class="d-none d-lg-block mb-0 ms-0" />
                                 </div>
                             </div>
@@ -123,8 +115,10 @@
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">Mountains</h4>
-                                    <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                                    <h4 class="text-white">Porque la programacion?</h4>
+                                    <p class="mb-0 text-white-50">En unos momentos de mi vida estuve interesado en esta carrera pero nunca tuve la oportunidad de cursarla.
+                                         al pasar del tiempo volvio a surgir la posibilidad y dada la cantidad de demanda que existe hoy en dia me interese en aprender de ella 
+                                         por lo que hoy en dia me encuentro finalizando el curso de creacion de paginas web como backend </p>
                                     <hr class="d-none d-lg-block mb-0 me-0" />
                                 </div>
                             </div>
@@ -166,7 +160,7 @@
                                 <i class="fas fa-mobile-alt text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Phone</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">+1 (555) 902-8832</div>
+                                <div class="small text-black-50">+54 (11) 1234-8832</div>
                             </div>
                         </div>
                     </div>
