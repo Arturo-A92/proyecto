@@ -26,13 +26,12 @@
         <div class="d-flex justify-content-center">
             <div class="text-center">
                 <ul class="text-white">
+                    <li>Nombre de Usuario: {{object.username}}</li>
                     <li>Nombre: {{object.first_name}}<li>
                     <li>Apellido: {{object.last_name}}<li>
                     <li>Correo electronico: {{object.email}} </li>
-                    <li>Nombre de Usuario: {{object.username}}</li>
-                </ul>
-                
-                <img height="128" src="{{ object.avatar_set.first.image.url }}" > </img>     
+                    <img height="128" src="{{ avatar.object.first.image.url }}" > </img>
+                </ul>                     
             </div>
         </div>
     </div>
