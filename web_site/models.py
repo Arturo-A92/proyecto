@@ -11,6 +11,7 @@ class Publisher(models.Model):
     fecha_modificacion = models.DateField(auto_now=True)
     image = models.ImageField(upload_to="avatars", null=True, blank=True)
 
+
 class BlogModel(models.Model):
     titulo = models.CharField(max_length=100)
     sub_titulo = models.CharField(max_length=100)

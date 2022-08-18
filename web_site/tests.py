@@ -28,17 +28,7 @@ class TestBlog(TestCase):
         #Cuando se usa class based views se tiene que comprar por el nombre de instancia.
         self.assertEqual(response.resolver_match.func.__name__, BlogList.as_view().__name__)
 
-
-    def test_borrar_blog__usuario_no_logueado(self):
-        """
-        Un usuario que no este logueado no puede borrar un post.
-        El response va a retornar un status_code 302 que significa redirect. 
-        En este caso Django por defecto redirecciona al login. 
-        """
-        response = self.client.get(reverse('blog_delete',kwargs={'pk':'1'}))
-        self.assertRedirects(response, "/blog/entrar/?next=/blog/borrar/'pk'/", status_code=302, target_status_code=200)
-
-    
+       
     def test_borrar_blog__usuario_logueado_dueño_blog(self):
         """
         Si el usuario esta logueado y es el dueño del post tiene permisos de borrado.
