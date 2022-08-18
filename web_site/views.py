@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
-from web_site.models import BlogModel, Avatar
+from web_site.models import BlogModel, Publisher
 from web_site.forms import Busqueda
 
 
@@ -32,8 +32,12 @@ def buscar(request):
     return HttpResponse(respuesta)
 
 def imagen(request):
-        avatares= Avatar.objects.filter(user=request.user.id)
+        avatares= BlogModel.objects.filter(user=request.user.id)
         return render(request, "web_site/inicio.html", {"url":avatares[0].imagen.url})
+
+def About(request):
+    return render(request, "web_site/about.html")
+
 
 #loggin
 
@@ -45,7 +49,7 @@ class SignUpView(SuccessMessageMixin, CreateView):
 
 class BloggerProfile(DetailView):
 
-    model = User
+    model = Publisher
     template_name = "web_site/blogger_detail.html"
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
@@ -63,10 +67,7 @@ class BlogList(ListView):
 
     model = BlogModel
     template_name = "web_site/inicio.html"
-
     
-
-
 
 class BlogDetail(DetailView):
 

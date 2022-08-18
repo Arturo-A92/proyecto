@@ -2,11 +2,6 @@ from django import forms
 from web_site.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-class formulario(forms.Form):
-
-    curso = forms.CharField(required = True )
-    camada = forms.IntegerField()
-
 class Busqueda(forms.Form):
     criterio = forms.CharField()
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from web_site.views import(buscar, busqueda, imagen)
+from web_site.views import(buscar, busqueda, imagen, About)
 from web_site import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('busqueda/',views.busqueda, name= "busqueda"),
     path('busqueda/buscar/', views.buscar),
+    path('quienes_somos/', views.About),
 
 #loggin
     path("crear/", views.SignUpView.as_view(), name ="blogger_signup"),
