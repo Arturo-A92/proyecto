@@ -1,5 +1,11 @@
 <h1> Proyecto final </h1>
 
+<h2>casos de prueba</h2>
+https://docs.google.com/spreadsheets/d/1_TMw5s77WJwoRkuv8Fb53X0SqMLGpamt/edit?usp=sharing&ouid=115327619335607603676&rtpof=true&sd=true
+
+<h2>video de vista del sitio web en youtube</h2>
+https://youtu.be/F05ygzMX1uI
+
 <h2>realizado por: Arturo Alfonzo</h2>
 
 Este proyecto tiene como objetivo crear un blog como proyecto final de curso.
