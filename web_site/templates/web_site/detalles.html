@@ -23,15 +23,15 @@
 <header class="masthead">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
-            <div class="text-center">
+            <div class="btn btn-light btn-xl" class="text-center">
                 <div>
-                    <h1>{{object.titulo}}</h1>
-                    <h2>{{object.sub_titulo}}</h2>
-                    <p> {{object.cuerpo}} </p>
-                    <h3>{{object.fecha_creacion}}</h3>
-                    <h3>{{object.autor}}</h3>
-                </div>
-                <img height="128" src="{{ object.image.url }}" > </img>
+                    <li>Titulo: {{object.titulo}}</li>
+                    <li>Sub-Titulos: {{object.sub_titulo}}</li>
+                    <li> Cuerpo: {{object.cuerpo}} </li>
+                    <li>Fecha de creacion: {{object.fecha_creacion}}</li>
+                    <li>Autor: {{object.autor}}</li>
+                </div>                               
+                <img height="128" src="{{ object.image.url }}" > </img>                
             </div>
         </div>
     </div>

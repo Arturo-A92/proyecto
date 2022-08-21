@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from operator import truediv
 from statistics import mode
 from django.db import models
-from django.contrib.auth.models import User
+
 
 class Publisher(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_creacion = models.DateField(auto_now_add=True)
     fecha_modificacion = models.DateField(auto_now=True)
     image = models.ImageField(upload_to="avatars", null=True, blank=True)
+    
 
 
 class BlogModel(models.Model):
